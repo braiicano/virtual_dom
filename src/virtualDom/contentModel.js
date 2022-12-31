@@ -30,6 +30,10 @@ export {
   Li,
   Br,
   Table,
-  Column,
-  Row,
+  Thead,
+  Tbody,
+  Trow,
+  Tcolumn,
+  Th,
+  Span,
 };

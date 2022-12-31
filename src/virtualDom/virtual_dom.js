@@ -3,7 +3,7 @@ import { Container } from "./contentModel.js";
 const print = (...e) => console.log(...e);
 
 const app = appCreate("app");
-const App = (child) => render(app, child);
+const App = (child, parent = app) => render(child, parent);
 
 function destruct(node) {
   let t = node[0],
@@ -39,24 +39,26 @@ function propsAdd(props, element) {
   );
 }
 
-function render(node, component) {
-  let element;
-  if (typeof component === "string") {
-    element = document.createTextNode(component);
-    return node.appendChild(element);
-  } else if (typeof component === "object") {
-    let { type, props, children } = destruct(component);
-    element = document.createElement(type);
-    if (props) propsAdd(props, element);
-    if (typeof children === "string") {
-      render(element, children);
-    } else if (typeof children === "object") {
-      children.forEach((child) => {
-        render(element, child);
-      });
-    }
-    return node.appendChild(element);
-  }
+function render(component, node) {
+  let element = create(component);
+  return node.appendChild(element);
 }
 
-export { App, print, render };
+function create(component) {
+  if (typeof component === "string") {
+    return document.createTextNode(component);
+  } else if (typeof component === "object") {
+    let { type, props, children } = destruct(component);
+    let element = document.createElement(type);
+    if (props) propsAdd(props, element);
+    if (typeof children === "string") {
+      render(children, element);
+    } else if (typeof children === "object") {
+      children.forEach((child) => {
+        render(child, element);
+      });
+    }
+    return element;
+  }
+}
+export { App, print, render, create };
