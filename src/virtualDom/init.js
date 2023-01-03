@@ -1,15 +1,17 @@
-import { render } from "./virtual_dom.js";
-import { Container } from "./contentModel.js";
+import { render } from "./virtualDom.js";
 
-const head = document.head;
-const body = document.body;
-const css = ["link", { rel: "stylesheet", href: "src/virtualDom/app.css" }];
-const createApp = Container([], { id: "app" });
-export default function appCreate(id = "app") {
-  render(css, head);
-  const app = document.getElementById(id);
-  if (!app) {
-    return render(createApp, body);
-  }
-  return app;
+export function init(vdom) {
+  let css = vdom("link", { rel: "stylesheet", href: "src/components/app.css" });
+  let v = 0;
+  const c = vdom("div", { id: "app" });
+  const h = document.head;
+  const b = document.body;
+  if (h.querySelector("link"))
+    for (const l of h.querySelectorAll("link")) {
+      v = l.href.includes("app.css");
+      if (v) return;
+    }
+  else render(h, css);
+  if (!b.querySelector("#app")) return render(b, c);
+  return b.querySelector("#app");
 }

@@ -1,9 +1,3 @@
-import { renderNavbar } from "./components/navbar.js";
+import { main } from "./virtualDom/virtualDom.js";
 
-// export function container() {
-//   return new renderNavbar("hola mundo").navbar();
-// }
-
-export function container(){
-    return renderNavbar()
-}
+export { main };
