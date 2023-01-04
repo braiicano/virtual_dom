@@ -1,3 +1,5 @@
-import { main } from "./virtualDom/virtualDom.js";
+import { Welcome } from "./components/Welcome.js";
+import { main, render, vdom } from "./virtualDom/virtualDom.js";
 
-export { main };
+export { main, render, vdom };
+export { Welcome };
