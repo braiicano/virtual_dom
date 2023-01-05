@@ -8,7 +8,7 @@ export function init(vdom) {
   const b = document.body;
   if (h.querySelector("link"))
     for (const l of h.querySelectorAll("link")) {
-      v = l.href.includes("app.css");
+      v = l.href.includes(".css");
       if (v) return;
     }
   else render(h, css);

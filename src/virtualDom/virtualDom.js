@@ -1,6 +1,10 @@
 import { init } from "./init.js";
 
 const main = init(virtualDom);
+// const main = (r = true) => {
+//   if (r == true) return init(virtualDom);
+//   else return document.getElementById(r);
+// };
 
 function virtualDom(type, props, ...content) {
   return {

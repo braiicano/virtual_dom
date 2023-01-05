@@ -8,7 +8,7 @@ export function Welcome(props) {
     vdom(
       "h4",
       { class: "text-success" },
-      `Hola ${props ? props.name : "mundo"}`
+      `Welcome to vDom ${props ? props.name : ""}`
     )
   );
 }
