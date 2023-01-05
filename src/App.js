@@ -1,3 +1,4 @@
+import { modal } from "./components/Modal.js";
 import { Welcome } from "./components/Welcome.js";
 import { main, render, useState, vdom } from "./virtualDom/virtualDom.js";
 
@@ -39,8 +40,9 @@ export function App() {
   const showModal = () => {
     if (state().openModal) setState({ openModal: false });
     else setState({ openModal: true });
-    console.log(state().openModal)
+    console.log(state().openModal);
   };
+  console.log(modal(state, handleChange));
   return vdom(
     "div",
     {},
@@ -54,8 +56,6 @@ export function App() {
           "button",
           {
             class: "btn btn-primary my-2",
-            data_toggle: "modal",
-            data_target: "#insert",
             onClick: showModal,
           },
           "Insert new player"
@@ -101,115 +101,6 @@ export function App() {
         )
       )
     ),
-    vdom(
-      "div",
-      { class: "modal", isOpen: state().openModal, id: "insert" },
-      vdom(
-        "div",
-        { class: "modal-dialog", role: "document" },
-        vdom(
-          "div",
-          { class: "modal-content" },
-          vdom(
-            "div",
-            { class: "modal-header" },
-            vdom("h5", { class: "modal-title" }, "Insert new player"),
-            vdom(
-              "button",
-              {
-                class: "btn-close",
-                type: "button",
-                data_bs_dismiss: "modal",
-                aria_label: "Close",
-              },
-              vdom("span", { aria_hidden: "true" })
-            )
-          ),
-          vdom(
-            "div",
-            { class: "modal-body" },
-            vdom(
-              "form",
-              { class: "form-group" },
-              vdom(
-                "label",
-                {
-                  class: "form-label mt-4",
-                  for: "id",
-                },
-                "ID:"
-              ),
-              vdom("input", {
-                class: "form-control",
-                id: "id",
-                name: "id",
-                type: "text",
-                readonly: "",
-                value: state().data.length + 1,
-              })
-            ),
-            vdom(
-              "form",
-              { class: "form-group" },
-              vdom(
-                "label",
-                {
-                  class: "form-label mt-4",
-                  for: "pj",
-                },
-                "Fullname:"
-              ),
-              vdom("input", {
-                class: "form-control",
-                id: "pj",
-                name: "pj",
-                type: "text",
-                value: "",
-                autofocus: "",
-                onChange: handleChange,
-              })
-            ),
-            vdom(
-              "form",
-              { class: "form-group" },
-              vdom(
-                "label",
-                {
-                  class: "form-label mt-4",
-                  for: "country",
-                },
-                "Country:"
-              ),
-              vdom("input", {
-                class: "form-control",
-                id: "country",
-                name: "country",
-                type: "text",
-                value: "",
-                onChange: handleChange,
-              })
-            )
-          ),
-          vdom(
-            "div",
-            { class: "modal-footer" },
-            vdom(
-              "button",
-              { class: "btn btn-primary", type: "button" },
-              "Save changes"
-            ),
-            vdom(
-              "button",
-              {
-                class: "btn btn-secondary",
-                type: "button",
-                data_bs_dismiss: "modal",
-              },
-              "Close"
-            )
-          )
-        )
-      )
-    )
+    modal(state, handleChange)
   );
 }
