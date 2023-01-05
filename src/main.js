@@ -1,4 +1,4 @@
-import { main, Welcome, vdom, render } from "./App.js";
+import { main, Welcome, vdom, render, App } from "./App.js";
 
 // in coments, says complete or not
 // render(main,"hola mundo") // render text in main... status: insert text, OK
@@ -11,3 +11,6 @@ const div = vdom("div", { class: "text-center" }, h6); //create container with c
 
 const name = "Braian"; //create a property with value
 // render(main,Welcome({name})) //import a function to receive props "name" and render this, OK
+
+//render a simple CRUD
+render(main, App());
